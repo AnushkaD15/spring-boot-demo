@@ -2,11 +2,13 @@ package com.demo.springboottrial.springbootdemo.Controller;
 
 
 import com.demo.springboottrial.springbootdemo.entity.Department;
+import com.demo.springboottrial.springbootdemo.error.DepartmentNotFoundException;
 import com.demo.springboottrial.springbootdemo.service.DepartmentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.DescriptorAccess;
 import java.util.List;
 
 @RestController
@@ -14,9 +16,11 @@ public class DepartmentController {
 
     @Autowired
     private DepartmentService departmentService;
-    @PostMapping(value= "/departments")
-    public Department saveDepartment(@RequestBody Department department){
 
+    private  final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
+    @PostMapping(value= "/departments")
+    public Department saveDepartment( @RequestBody Department department){
+        LOGGER.info("Inside saveDepartment of DepartmentController");
         return departmentService.saveDepartment(department);
     }
     @GetMapping(value = "/departments")
@@ -25,7 +29,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments/{id}")
-    public Department fetchDepartmentById(@PathVariable("id") Long departmentId){
+    public Department fetchDepartmentById(@PathVariable("id") Long departmentId) throws DepartmentNotFoundException {
         return departmentService.fetchDepartmentById(departmentId);
     }
 
