@@ -5,8 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Department {
 
     @Id
@@ -46,17 +54,6 @@ public class Department {
 
     public void setDepartmentCode(String departmentCode) {
         this.departmentCode = departmentCode;
-    }
-
-    public Department(Long departmentId, String departmentName, String departmentAddress, String departmentCode) {
-        this.departmentId = departmentId;
-        this.departmentName = departmentName;
-        this.departmentAddress = departmentAddress;
-        this.departmentCode = departmentCode;
-    }
-
-    public Department(){
-
     }
 
     @Override
